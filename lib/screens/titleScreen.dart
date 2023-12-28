@@ -13,7 +13,7 @@ class _TitleScreenState extends State<TitleScreen> {
   void initState() {
     super.initState();
     // Delay for 1 second and then navigate to the next screen
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const ContactScreen()));
     });
@@ -25,7 +25,7 @@ class _TitleScreenState extends State<TitleScreen> {
       body: Center(
         child: AnimatedOpacity(
           opacity: 1.0,
-          duration: Duration(seconds: 1),
+          duration: Duration(seconds: 2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

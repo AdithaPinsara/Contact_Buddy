@@ -17,7 +17,7 @@ class Contactsdao {
   Future<void> addContacts(String contactsName, int contactsNumber) async {
     var db = await DatabaseInformation.databaseAccess();
 
-    var newContact = Map<String, dynamic>();
+    var newContact = <String, dynamic>{};
     newContact["contacts_name"] = contactsName;
     newContact["contacts_number"] = contactsNumber;
 

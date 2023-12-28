@@ -16,7 +16,7 @@ class _ContactScreenState extends State<ContactScreen> {
     return contactsList;
   }
 
-  bool aramaYap = false;
+  bool searching = false;
   var searchText = '';
 
   Future<List<Contacts>> contactsSearch(String searchText) async {
@@ -40,7 +40,7 @@ class _ContactScreenState extends State<ContactScreen> {
             onChanged: (searchResult) {
               setState(() {
                 searchText = searchResult;
-                aramaYap = true;
+                searching = true;
               });
             },
             style: const TextStyle(fontSize: 20.0),
@@ -54,10 +54,16 @@ class _ContactScreenState extends State<ContactScreen> {
         ),
       ),
       body: FutureBuilder<List<Contacts>>(
-        future: aramaYap ? contactsSearch(searchText) : allContactsShow(),
+        future: searching ? contactsSearch(searchText) : allContactsShow(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var contactsList = snapshot.data;
+            if (contactsList!.isEmpty) {
+              return const Center(
+                child: Text("No contact data found",
+                    style: TextStyle(fontSize: 20)),
+              );
+            }
             return ListView.builder(
               itemCount: contactsList!.length,
               itemBuilder: (context, index) {
@@ -102,9 +108,9 @@ class _ContactScreenState extends State<ContactScreen> {
             );
           } else {
             return const Center(
-              child: Text("No contact data found",
-                  style: TextStyle(color: Colors.white)),
-            );
+                // child: Text("No contact data found",
+                //     style: TextStyle(fontSize: 20)),
+                );
           }
         },
       ),
